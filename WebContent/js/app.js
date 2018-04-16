@@ -10,40 +10,30 @@
             $routeProvider.when('/addproducts/', {
                 controller: 'addProductCtrl',
                 templateUrl: 'modals/addproducts.html',
-                access: {
-                    restricted: true
-                },
                 css: 'css/style.css'
             });
             $routeProvider.when('/searchproducts/', {
                 controller: 'searchProductCtrl',
                 templateUrl: 'modals/searchproducts.html',
-                access: {
-                    restricted: true
-                },
                 css: 'css/style.css'
             });
             $routeProvider.otherwise({
                 controller: 'pieCtrl',
                 templateUrl: 'modals/piechart.html',
-                access: {
-                    restricted: true
-                },
                 css: 'css/style.css'
             });
-
         });
 
     //Controller Declaration Controller Declaration Controller Declaration Controller Declaration Controller Declaration Controller Declaration 
     angular.module('appControllers', [])
         .controller('pieCtrl', PieCtrl)
         .controller('addProductCtrl', AddProductCtrl)
-        .controller('searchProductCtrl',SearchProductCtrl);
+        .controller('searchProductCtrl', SearchProductCtrl);
 
     //Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers 
     function PieCtrl(ApiRequestsService, $scope) {
-        console.log('calling example');
-        var requestPromise = ApiRequestsService.example().then(function(data){
+        var that = this;
+        $scope.pieChartRequest = $scope.pieChartRequest || ApiRequestsService.request('GET', 'dummy').then(function (data) {
             console.log(data);
         });
     }
@@ -60,11 +50,23 @@
     function ApiRequestsService($http) {
         var that = this;
 
-        that.example = function () {
-            return $http.get('https://api.github.com/users/luisxcam').then(function (response) {
-                console.log('request finished');
-                return response.data;
-            });
+        that.request = function (method, route, data) {
+            var req = {
+                method: method,
+                url: 'http://localhost:8080/products-ut-wo-db/rest/product/' + route,
+                data: data || {}
+            }
+            console.log('HTTP => Making %s request to %s', method, route);
+            console.log(data || 'no data on request');
+
+            try {
+                return $http(req).then(function (response) {
+                    return response.data
+                });
+            } catch (e) {
+                console.error('error on request');
+                console.error(e);
+            }
         }
     }
 })();
