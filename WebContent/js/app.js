@@ -3,6 +3,7 @@
 (function () {
     //Angular Modules Angular Modules Angular Modules Angular Modules Angular Modules Angular Modules Angular Modules Angular Modules Angular Modules 
     angular.module('mainApp', ['appControllers', 'ngRoute'])
+        .controller('mainCtrl',function(){})
         .service('ApiRequestsService', ApiRequestsService)
         .config(function ($routeProvider, $locationProvider) {
             $locationProvider.hashPrefix('');
@@ -32,17 +33,19 @@
 
     //Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers 
     function PieCtrl(ApiRequestsService, $scope) {
-        var that = this;
+        $scope.helloWorld = 'hello pie';
         $scope.pieChartRequest = $scope.pieChartRequest || ApiRequestsService.request('GET', 'dummy').then(function (data) {
             console.log(data);
         });
     }
 
     function AddProductCtrl(ApiRequestsService, $scope) {
+        $scope.helloWorld = 'hello add';
         console.log('add product loaded');
     }
 
     function SearchProductCtrl(ApiRequestsService, $scope) {
+        $scope.helloWorld = 'hello search';
         console.log('search for product');
     }
 
