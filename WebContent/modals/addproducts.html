@@ -1,0 +1,66 @@
+<div ng-controller='addProductCtrl'>
+	<!-- <div class="sub-banner-image1">
+		<div class="sub-banner-text">
+			<h1>Add Products‎</h1>
+		</div>
+	</div> -->
+	<div>
+		<form name='userForm' ng-submit='submitForm(userForm.$valid)' novalidate>
+			<div class='container product-text'>
+				<input type='text' name='productEnglish' ng-model='productEnglish' class='form-control' placeholder='Product English *' required>
+				<span ng-show='submitted && userForm.productEnglish.$invalid'></span>
+				<span ng-show='submitted && userForm.productEnglish.$invalid' class='help-block'>Required Field</span>
+
+				<input type='text' name='productFrench' ng-model='productFrench' class='form-control' placeholder='Product French *' required>
+				<span ng-show='submitted && userForm.productFrench.$invalid'></span>
+				<span ng-show='submitted && userForm.productFrench.$invalid' class='help-block'>Required Field</span>
+
+				<input type='text' name='brandNameEnglish' ng-model='brandNameEnglish' class='form-control' placeholder='Brand Name English *'
+				 required>
+				<span ng-show='submitted && userForm.brandNameEnglish.$invalid'></span>
+				<span ng-show='submitted && userForm.brandNameEnglish.$invalid' class='help-block'>Required Field</span>
+
+				<input type='text' name='brandNameFrench' ng-model='brandNameFrench' class='form-control' placeholder='Product French *'
+				 required>
+				<span ng-show='submitted && userForm.brandNameFrench.$invalid'></span>
+				<span ng-show='submitted && userForm.brandNameFrench.$invalid' class='help-block'>Required Field</span>
+
+				<span class='mainselection'>
+					<select id='productType' name='productType' ng-model='productType' class='form-control' required>
+						<option value='' disabled selected>Product Type *</option>
+						<option value='1'>Text1</option>
+						<option value='2'>Text2</option>
+					</select>
+				</span>
+				<span ng-show='submitted && userForm.productType.$invalid'></span>
+				<span ng-show='submitted && userForm.productType.$invalid' class='help-block'>Required Field</span>
+				<br>
+
+				<input type='text' name='additionalProductIdentification' ng-model='additionalProductIdentification' class='form-control'
+				 placeholder='Additional Product Identification *' required>
+				<span ng-show='submitted && userForm.additionalProductIdentification.$invalid'></span>
+				<span ng-show='submitted && userForm.additionalProductIdentification.$invalid' class='help-block'>Required Field</span>
+				<br>
+
+				<span class='mainselection'>
+					<select id='targetMarket' name='targetMarket' ng-model='targetMarket' class='form-control' required>
+						<option value='' disabled selected>Target Market *</option>
+						<option value='1'>Text1</option>
+						<option value='2'>Text2</option>
+					</select>
+				</span>
+				<span ng-show='submitted && userForm.targetMarket.$invalid'></span>
+				<span ng-show='submitted && userForm.targetMarket.$invalid' class='help-block'>Required Field</span>
+				<br>
+
+				<input type='text' name='productURL' ng-model='productURL' class='form-control' placeholder='Product Image URL *' required>
+				<span ng-show='submitted && userForm.productURL.$invalid'></span>
+				<span ng-show='submitted && userForm.productURL.$invalid' class='help-block'>Required Field</span>
+				<br>
+
+				<input type='reset' value='Reset' ng-click='reset()' class='cancelbtn'>
+				<button type='submit' ng-click='submitForm()'>Save</button>
+			</div>
+		</form>
+	</div>
+</div>
