@@ -9,9 +9,11 @@
 			<div class='container product-text'>
 				<input type='text' name='productEnglish' ng-model='product.form.productDescriptionEnglish' class='form-control' placeholder='Product English *' required>
 				<span ng-show='userForm.$submitted && userForm.productEnglish.$invalid' class='help-block'>Required Field</span>
+				<span ng-show='userForm.$submitted && userForm.productEnglish.$viewValue == userForm.productFrench.$viewValue' class='help-block'>Description is equal</span>
 
 				<input type='text' name='productFrench' ng-model='product.form.productDescriptionFrench' class='form-control' placeholder='Product French *' required>
 				<span ng-show='userForm.$submitted && userForm.productFrench.$invalid' class='help-block'>Required Field</span>
+				<span ng-show='userForm.$submitted && userForm.productEnglish.$viewValue == userForm.productFrench.$viewValue' class='help-block'>Description is equal</span>
 
 				<input type='text' name='brandNameEnglish' ng-model='product.form.brandNameEnglish' class='form-control' placeholder='Brand Name English *' required>
 				<span ng-show='userForm.$submitted && userForm.brandNameEnglish.$invalid' class='help-block'>Required Field</span>
