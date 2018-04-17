@@ -1,7 +1,7 @@
 # 3416 Group Assignment
 ### Todo:
 - Pie page
-    - Pie chart
+    - Pie chart (mandatory)
     - Making it pretty (optional)
 - Add Products
     - Disable the submit button until the form is good to go
