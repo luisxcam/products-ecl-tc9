@@ -7,3 +7,4 @@
     - Disable the submit button until the form is good to go
     - Add some form of feedback on HTTP callback (optional)
 - Search Product
+    - Need to add CSS to table

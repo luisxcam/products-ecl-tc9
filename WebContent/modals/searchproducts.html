@@ -17,59 +17,23 @@
 		</form>
 	</div>
 
-	<!-- We need an NG-SHOW and to code the NG-REPEAT for the data rquest-->
-	<!-- <div align="center">
+	<div ng-show='list.length > 0'>
 		<table>
-		  <tr>
-		    <th>Product ID</th>
-			<th>Product Description</th>
-			<th>Brand Name</th>
-			<th>Product Type</th>
-			<th>Additional Product Identification</th>
-			<th>Target Market</th>
-			<th>Product Image URL</th>
-			<th>Status</th>
-		  </tr>
-		  <tr>
-		    <td>N/A</td>
-		    <td>N/A</td>
-		    <td>N/A</td>
-		    <td>N/A</td>
-		    <td>N/A</td>
-		    <td>N/A</td>
-		    <td>N/A</td>
-		    <td>N/A</td>
-		  </tr>
-		  <tr>
-		    <td>N/A</td>
-		    <td>N/A</td>
-		    <td>N/A</td>
-		    <td>N/A</td>
-		    <td>N/A</td>
-		    <td>N/A</td>
-		    <td>N/A</td>
-		    <td>N/A</td>
-		  </tr>
-		  <tr>
-		    <td>N/A</td>
-		    <td>N/A</td>
-		    <td>N/A</td>
-		    <td>N/A</td>
-		    <td>N/A</td>
-		    <td>N/A</td>
-		    <td>N/A</td>
-		    <td>N/A</td>
-		  </tr>
-		  <tr>
-		    <td>N/A</td>
-		    <td>N/A</td>
-		    <td>N/A</td>
-		    <td>N/A</td>
-		    <td>N/A</td>
-		    <td>N/A</td>
-		    <td>N/A</td>
-		    <td>N/A</td>
-		  </tr>
+			<thead>
+				<tr>
+					<th>Id</th><th>Descriptionth</th><th>Brand Name</th><th>Type</th><th>Additional Id</th><th>Target Market</th><th>Image URL</th><th>Status</th>
+				</tr>
+			</thead>
+			<tr ng-repeat='product in list'>
+				<td>{{product.id}}</td>
+				<td>{{product.productDescriptionEnglish}}</td>
+				<td>{{product.brandNameEnglish}}</td>
+				<td>{{product.productType}}</td>
+				<td>{{product.additionalProductIdentification}}</td>
+				<td>{{product.targetMarket}}</td>
+				<td>{{product.productImageUrl}}</td>
+				<td>{{product.status}}</td>
+			</tr>
 		</table>
-	</div> -->
+	</div>
 </div>

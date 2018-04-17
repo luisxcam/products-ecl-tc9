@@ -68,6 +68,7 @@
 
     function SearchProductCtrl(ApiRequestsService, $scope) {
         $scope.search = {};
+        $scope.list = [];
         $scope.search.form = {
             productId:'',
             productDescriptionEnglish:''
@@ -76,13 +77,12 @@
         $scope.search.blankForm = angular.copy($scope.search.form);
 
         $scope.search.submit = function(productId,productDescriptionEnglish){
-            console.log(productId);
-            console.log(productDescriptionEnglish);
         }
 
         $scope.search.reset = function(){
             $scope.search.form = angular.copy($scope.search.blankForm);
             $scope.searchForm.$setPristine();
+            $scope.list = [];
         }
     }
 
