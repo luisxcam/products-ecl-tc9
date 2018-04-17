@@ -3,7 +3,7 @@
 (function () {
     //Angular Modules Angular Modules Angular Modules Angular Modules Angular Modules Angular Modules Angular Modules Angular Modules Angular Modules 
     angular.module('mainApp', ['appControllers', 'ngRoute'])
-        .controller('mainCtrl',function(){})
+        .controller('mainCtrl', function () { })
         .service('ApiRequestsService', ApiRequestsService)
         .config(function ($routeProvider, $locationProvider) {
             $locationProvider.hashPrefix('');
@@ -40,31 +40,31 @@
     }
 
     function AddProductCtrl(ApiRequestsService, $scope) {
-        var that = this;
-
-        $scope.product = {
-            productDescriptionEnglish:'',
-            productDescriptionFrench:'',
-            brandNameEnglish:'',
-            brandNameFrench:'',
-            productType:'',
-            additionalProductIdentification:'',
-            targetMarket:'',
-            productImageUrl:'',
-            submit:function(){
-                addProduct($scope.product);
-            },
-            reset:function(){
-                $scope.product = angular.copy($scope.blankForm);
-                $scope.userForm.$setPristine();
-            }
+        $scope.product = {};
+        $scope.product.form = {
+            productDescriptionEnglish: '',
+            productDescriptionFrench: '',
+            brandNameEnglish: '',
+            brandNameFrench: '',
+            productType: '',
+            additionalProductIdentification: '',
+            targetMarket: '',
+            productImageUrl: '',
+            status:''
         };
 
-        $scope.blankForm = angular.copy($scope.product);
+        $scope.product.blankForm = angular.copy($scope.product.form);
 
-        var addProduct = function(data){
-            console.log(data);
-        }
+        $scope.product.submit = function () {
+            $scope.productPost = $scope.productPost || ApiRequestsService.request('POST', 'product/create',$scope.product.form).then(function (data) {
+                console.log(data);
+            });
+        };
+
+        $scope.product.reset = function () {
+            $scope.product.form = angular.copy($scope.product.blankForm);
+            $scope.userForm.$setPristine();
+        };
     }
 
     function SearchProductCtrl(ApiRequestsService, $scope) {
@@ -73,7 +73,7 @@
     }
 
     //API Request Service API Request Service API Request Service API Request Service API Request Service API Request Service API Request Service 
-    function ApiRequestsService($http,$timeout) {
+    function ApiRequestsService($http, $timeout) {
         var that = this;
 
         that.request = function (method, route, data) {
@@ -82,7 +82,7 @@
                 url: 'http://localhost:8080/products-ut-wo-db/rest/' + route,
                 data: data || {}
             }
-            console.log('HTTP => Making %s request to %s', method, route);
+            console.log('$HTTP => Making %s request to %s', method, route);
             console.log(data || 'no data on request');
 
             try {

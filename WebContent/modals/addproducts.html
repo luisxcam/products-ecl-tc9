@@ -7,20 +7,20 @@
 	<div>
 		<form name='userForm' ng-submit='product.submit()' novalidate>
 			<div class='container product-text'>
-				<input type='text' name='productEnglish' ng-model='product.productDescriptionEnglish' class='form-control' placeholder='Product English *' required>
+				<input type='text' name='productEnglish' ng-model='product.form.productDescriptionEnglish' class='form-control' placeholder='Product English *' required>
 				<span ng-show='userForm.$submitted && userForm.productEnglish.$invalid' class='help-block'>Required Field</span>
 
-				<input type='text' name='productFrench' ng-model='product.productDescriptionFrench' class='form-control' placeholder='Product French *' required>
+				<input type='text' name='productFrench' ng-model='product.form.productDescriptionFrench' class='form-control' placeholder='Product French *' required>
 				<span ng-show='userForm.$submitted && userForm.productFrench.$invalid' class='help-block'>Required Field</span>
 
-				<input type='text' name='brandNameEnglish' ng-model='product.brandNameEnglish' class='form-control' placeholder='Brand Name English *' required>
+				<input type='text' name='brandNameEnglish' ng-model='product.form.brandNameEnglish' class='form-control' placeholder='Brand Name English *' required>
 				<span ng-show='userForm.$submitted && userForm.brandNameEnglish.$invalid' class='help-block'>Required Field</span>
 
-				<input type='text' name='brandNameFrench' ng-model='product.brandNameFrench' class='form-control' placeholder='Brand Name French *' required>
+				<input type='text' name='brandNameFrench' ng-model='product.form.brandNameFrench' class='form-control' placeholder='Brand Name French *' required>
 				<span ng-show='userForm.$submitted && userForm.brandNameFrench.$invalid' class='help-block'>Required Field</span>
 
 				<span class='mainselection'>
-					<select id='productType' name='productType' ng-model='product.productType' class='form-control' required>
+					<select id='productType' name='productType' ng-model='product.form.productType' class='form-control' required>
 						<option value='' disabled selected>Product Type *</option>
 						<option value='pallet'>Pallet</option>
 						<option value='case'>Case</option>
@@ -30,13 +30,13 @@
 				<span ng-show='userForm.$submitted && userForm.productType.$error.required' class='help-block'>Required Field</span>
 				<br>
 
-				<input type='text' name='additionalProductIdentification' ng-model='product.additionalProductIdentification' class='form-control'
+				<input type='text' name='additionalProductIdentification' ng-model='product.form.additionalProductIdentification' class='form-control'
 				 placeholder='Additional Product Identification *' required>
 				<span ng-show='userForm.$submitted && userForm.additionalProductIdentification.$invalid' class='help-block'>Required Field</span>
 				<br>
 
 				<span class='mainselection'>
-					<select id='targetMarket' name='targetMarket' ng-model='product.targetMarket' class='form-control' required>
+					<select id='targetMarket' name='targetMarket' ng-model='product.form.targetMarket' class='form-control' required>
 						<option value='' disabled selected>Target Market *</option>
 						<option value='us'>US</option>
 						<option value='canada'>Canada</option>
@@ -45,9 +45,19 @@
 				<span ng-show='userForm.$submitted && userForm.targetMarket.$error.required' class='help-block'>Required Field</span>
 				<br>
 
-				<input type='url' name='productURL' ng-model='product.productImageUrl' class='form-control' placeholder='Product Image URL *' required>
+				<input type='url' name='productURL' ng-model='product.form.productImageUrl' class='form-control' placeholder='Product Image URL *' required>
 				<span ng-show='userForm.$submitted && userForm.productURL.$invalid && userForm.productURL.$viewValue==""' class='help-block'>Required Field</span>
 				<span ng-show='userForm.$submitted && userForm.productURL.$invalid && userForm.productURL.$viewValue!=""' class='help-block'>Invalid URL</span>
+				<br>
+
+				<span class='mainselection'>
+					<select id='status' name='status' ng-model='product.form.status' class='form-control' required>
+						<option value='' disabled selected>Status *</option>
+						<option value='active'>Active</option>
+						<option value='draft'>Draft</option>
+					</select>
+				</span>
+				<span ng-show='userForm.$submitted && userForm.status.$error.required' class='help-block'>Required Field</span>
 				<br>
 
 				<input type='button' value='Cancel' ng-click='product.reset()' class='cancelbtn'>
