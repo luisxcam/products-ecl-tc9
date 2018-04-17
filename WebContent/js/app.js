@@ -3,7 +3,7 @@
 (function () {
     //Angular Modules Angular Modules Angular Modules Angular Modules Angular Modules Angular Modules Angular Modules Angular Modules Angular Modules 
     angular.module('mainApp', ['appControllers', 'ngRoute'])
-        .controller('mainCtrl', function () { })
+        .controller('mainCtrl', function () {})
         .service('ApiRequestsService', ApiRequestsService)
         .config(function ($routeProvider, $locationProvider) {
             $locationProvider.hashPrefix('');
@@ -49,13 +49,13 @@
             additionalProductIdentification: '',
             targetMarket: '',
             productImageUrl: '',
-            status:''
+            status: ''
         };
 
         $scope.product.blankForm = angular.copy($scope.product.form);
 
         $scope.product.submit = function () {
-            $scope.productPost = $scope.productPost || ApiRequestsService.dummyPostRequest('POST', 'product/create',$scope.product.form).then(function (data) {
+            $scope.productPost = $scope.productPost || ApiRequestsService.dummyPostRequest('POST', 'product/create', $scope.product.form).then(function (data) {
                 console.log(data);
             });
         };
@@ -67,8 +67,22 @@
     }
 
     function SearchProductCtrl(ApiRequestsService, $scope) {
-        $scope.helloWorld = 'hello search';
-        console.log('search for product');
+        $scope.search = {};
+        $scope.search.form = {
+            productId:'',
+            productDescriptionEnglish:''
+        }
+
+        $scope.search.blankForm = angular.copy($scope.search.form);
+
+        $scope.search.submit = function(){
+            console.log('Hello Jaime Reyes');
+        }
+
+        $scope.search.reset = function(){
+            $scope.search.form = angular.copy($scope.search.blankForm);
+            $scope.searchForm.$setPristine();
+        }
     }
 
     //API Request Service API Request Service API Request Service API Request Service API Request Service API Request Service API Request Service 
@@ -84,25 +98,46 @@
             console.log('$HTTP => Making %s request to %s', method, route);
             console.log(data || 'no payload sent');
 
-                return $http(req).then(function (response) {
-                    console.log(response);
-                    return response.data
-                }).catch(function(e){
-                    console.error('Could not run $HTTP. Error on the request');
-                    throw e;
-                });
+            return $http(req).then(function (response) {
+                console.log(response);
+                return response.data
+            }).catch(function (e) {
+                console.error('Could not run $HTTP. Error on the request');
+                throw e;
+            });
         }
-
+        
         that.dummyPieRequest = function (method, route, data) {
             console.log('DUMMY => Making %s request to %s', method, route);
             console.log(data || 'no payload sent');
-            return $timeout(function () { return { availableProducts: 107, unusedProducts: 58 } }, 2000);
+            return $timeout(function () {
+                var responseData = {
+                    availableProducts: 107,
+                    unusedProducts: 58
+                }
+                console.log(responseData);
+                return responseData;
+            }, 2000);
         }
 
         that.dummyPostRequest = function (method, route, data) {
             console.log('DUMMY => Making %s request to %s', method, route);
             console.log(data || 'no payload sent');
-            return $timeout(function () { return { productDescriptionEnglish: 'Canned Veggies', productDescriptionFrench: 'Canned French Veggies', brandNameEnglish: 'English Soup', brandNameFrench: 'French Soup', productType: 'case', additionalProductIdentification: 'Some Id', targetMarket: 'canada', productImageUrl: 'https://static01.nyt.com/images/2016/11/29/dining/recipelab-chick-noodle-still/recipelab-chick-noodle-still-videoSixteenByNineJumbo1600.jpg', status:'active' } }, 2000);
+            return $timeout(function () {
+                var responseData = {
+                    productDescriptionEnglish: 'Canned Veggies',
+                    productDescriptionFrench: 'Canned French Veggies',
+                    brandNameEnglish: 'English Soup',
+                    brandNameFrench: 'French Soup',
+                    productType: 'case',
+                    additionalProductIdentification: 'Some Id',
+                    targetMarket: 'canada',
+                    productImageUrl: 'https://www.google.ca/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
+                    status: 'active'
+                }
+                console.log(responseData);
+                return responseData;
+            }, 2000);
         }
     }
 })();

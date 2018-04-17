@@ -4,18 +4,15 @@
 			<h1>Search Products‎</h1>
 		</div>
 	</div> -->
-	<h2 ng-bind="helloWorld"></h2>
 	<div>
-		<form action="/action_page.html">
-			<input type="text" name="product-id" placeholder="Product ID">
+		<form name='searchForm' ng-submit='search.submit(productId,productDescriptionEnglish)'>
+			<input type="text" name="productId" placeholder="Product ID" ng-model='search.form.productId'>
 			<br>
-			<input type="text" name="product-description" placeholder="Product Description">
+			<input type="text" name="productDescriptionEnglish" placeholder="Product Description" ng-model='search.form.productDescriptionEnglish'>
 			<br>
-			<!-- <input type="button" class="search-btn" value="Search"><br> -->
-			<input type="reset" value="Reset" class="cancelbtn">
-			</span>
+			<input type="button" value="Reset" class="cancelbtn" ng-click='search.reset()'>
 			<span class="search-btn">
-				<button>Search Products</button>
+				<button type="submit">Search Products</button>
 			</span>
 		</form>
 	</div>
