@@ -75,8 +75,9 @@
 
         $scope.search.blankForm = angular.copy($scope.search.form);
 
-        $scope.search.submit = function(){
-            console.log('Hello Jaime Reyes');
+        $scope.search.submit = function(productId,productDescriptionEnglish){
+            console.log(productId);
+            console.log(productDescriptionEnglish);
         }
 
         $scope.search.reset = function(){

@@ -5,7 +5,7 @@
 		</div>
 	</div> -->
 	<div>
-		<form name='searchForm' ng-submit='search.submit(productId,productDescriptionEnglish)'>
+		<form name='searchForm' ng-submit='search.submit(searchForm.productId.$viewValue,searchForm.productDescriptionEnglish.$viewValue)'>
 			<input type="text" name="productId" placeholder="Product ID" ng-model='search.form.productId'>
 			<br>
 			<input type="text" name="productDescriptionEnglish" placeholder="Product Description" ng-model='search.form.productDescriptionEnglish'>
