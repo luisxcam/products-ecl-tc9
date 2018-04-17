@@ -96,6 +96,15 @@
             });
         }
 
+        $scope.search.nullSearch = function(){
+            $scope.list = [];
+            $scope.searchProduct = null;
+            var route = '4real';
+            $scope.searchProduct = $scope.searchProduct || ApiRequestsService.dummyNullSearch('GET', route).then(function (data) {
+                $scope.list.push(data);
+            });
+        }
+
         $scope.search.reset = function () {
             $scope.search.form = angular.copy($scope.search.blankForm);
             $scope.searchForm.$setPristine();
@@ -155,6 +164,16 @@
                     status: 'active'
                 }
                 console.log(responseData);
+                return responseData;
+            }, 2000);
+        }
+
+        that.dummyNullSearch = function (method, route, data) {
+            console.log('DUMMY => Making %s request to %s', method, route);
+            console.log(data || 'no payload sent');
+            return $timeout(function () {
+                var responseData = {};
+                console.log('returned a whole lot of nothing');
                 return responseData;
             }, 2000);
         }
