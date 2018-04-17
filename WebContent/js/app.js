@@ -34,7 +34,6 @@
     //Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers 
     function PieCtrl(ApiRequestsService, $scope) {
         $scope.pieChartRequest = $scope.pieChartRequest || ApiRequestsService.dummyPieRequest('GET', 'availableProducts').then(function (data) {
-            console.log(data);
             $scope.pieChartData = data;
         });
     }
@@ -56,7 +55,7 @@
         $scope.product.blankForm = angular.copy($scope.product.form);
 
         $scope.product.submit = function () {
-            $scope.productPost = $scope.productPost || ApiRequestsService.request('POST', 'product/create',$scope.product.form).then(function (data) {
+            $scope.productPost = $scope.productPost || ApiRequestsService.dummyPostRequest('POST', 'product/create',$scope.product.form).then(function (data) {
                 console.log(data);
             });
         };
@@ -83,22 +82,27 @@
                 data: data || {}
             }
             console.log('$HTTP => Making %s request to %s', method, route);
-            console.log(data || 'no data on request');
+            console.log(data || 'no payload sent');
 
-            try {
                 return $http(req).then(function (response) {
+                    console.log(response);
                     return response.data
+                }).catch(function(e){
+                    console.error('Could not run $HTTP. Error on the request');
+                    throw e;
                 });
-            } catch (e) {
-                console.error('error on request');
-                console.error(e);
-            }
         }
 
         that.dummyPieRequest = function (method, route, data) {
             console.log('DUMMY => Making %s request to %s', method, route);
-            console.log(data || 'no data on request');
+            console.log(data || 'no payload sent');
             return $timeout(function () { return { availableProducts: 107, unusedProducts: 58 } }, 2000);
+        }
+
+        that.dummyPostRequest = function (method, route, data) {
+            console.log('DUMMY => Making %s request to %s', method, route);
+            console.log(data || 'no payload sent');
+            return $timeout(function () { return { productDescriptionEnglish: 'Canned Veggies', productDescriptionFrench: 'Canned French Veggies', brandNameEnglish: 'English Soup', brandNameFrench: 'French Soup', productType: 'case', additionalProductIdentification: 'Some Id', targetMarket: 'canada', productImageUrl: 'https://static01.nyt.com/images/2016/11/29/dining/recipelab-chick-noodle-still/recipelab-chick-noodle-still-videoSixteenByNineJumbo1600.jpg', status:'active' } }, 2000);
         }
     }
 })();
