@@ -41,16 +41,31 @@
     }
 
     function AddProductCtrl(ApiRequestsService, $scope) {
+        var that = this;
+
         $scope.product = {
-            productEnglish:'',
-            productFrench:'',
+            productDescriptionEnglish:'',
+            productDescriptionFrench:'',
             brandNameEnglish:'',
             brandNameFrench:'',
             productType:'',
+            additionalProductIdentification:'',
+            targetMarket:'',
+            productImageUrl:'',
             submit:function(){
-                console.log('hello world');
+                addProduct($scope.product);
+            },
+            reset:function(){
+                $scope.product = angular.copy($scope.blankForm);
+                $scope.userForm.$setPristine();
             }
         };
+
+        $scope.blankForm = angular.copy($scope.product);
+
+        var addProduct = function(data){
+            console.log(data);
+        }
     }
 
     function SearchProductCtrl(ApiRequestsService, $scope) {
