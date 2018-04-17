@@ -3,7 +3,7 @@
 (function () {
     //Angular Modules Angular Modules Angular Modules Angular Modules Angular Modules Angular Modules Angular Modules Angular Modules Angular Modules 
     angular.module('mainApp', ['appControllers', 'ngRoute'])
-        .controller('mainCtrl', function () {})
+        .controller('mainCtrl', function () { })
         .service('ApiRequestsService', ApiRequestsService)
         .config(function ($routeProvider, $locationProvider) {
             $locationProvider.hashPrefix('');
@@ -70,25 +70,36 @@
         $scope.search = {};
         $scope.list = [];
         $scope.search.form = {
-            productId:'',
-            productDescriptionEnglish:''
+            productId: '',
+            productDescriptionEnglish: ''
         }
 
         $scope.search.blankForm = angular.copy($scope.search.form);
 
-        $scope.search.submit = function(productId,productDescriptionEnglish){
-            if(!productId && !productDescriptionEnglish){
-                $scope.searchProduct = $scope.searchProduct || ApiRequestsService.request('GET', 'products').then(function (data) {
-                    for(var x = 0; x<data.length; x++){
+        $scope.search.submit = function (productId, productDescriptionEnglish) {
+            $scope.list = [];
+            var route = '';
+            if (!productId && !productDescriptionEnglish) route = 'products';
+            else if (productId && productDescriptionEnglish) route = 'product/' + productId + '/productIdAndProductDescriptionEnglish/' + productDescriptionEnglish.toUpperCase();
+            else if (productId) route = 'product/' + productId;
+            else route = 'product/productDescriptionEnglish/' + productDescriptionEnglish.toUpperCase();
+
+            $scope.searchProduct = $scope.searchProduct || ApiRequestsService.request('GET', route).then(function (data) {
+                if (Array.isArray(data)) {
+                    for (var x = 0; x < data.length; x++) {
                         $scope.list.push(data[x]);
                     }
-                });
-            }
+                } else {
+                    $scope.list.push(data);
+                }
+                $scope.searchProduct = null;
+            });
         }
 
-        $scope.search.reset = function(){
+        $scope.search.reset = function () {
             $scope.search.form = angular.copy($scope.search.blankForm);
             $scope.searchForm.$setPristine();
+            $scope.searchProduct = null;
             $scope.list = [];
         }
     }
@@ -114,7 +125,7 @@
                 throw e;
             });
         }
-        
+
         that.dummyPieRequest = function (method, route, data) {
             console.log('DUMMY => Making %s request to %s', method, route);
             console.log(data || 'no payload sent');
