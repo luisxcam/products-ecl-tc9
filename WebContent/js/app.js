@@ -33,10 +33,9 @@
 
     //Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers 
     function PieCtrl(ApiRequestsService, $scope) {
-        $scope.pieChartRequest = $scope.pieChartRequest || ApiRequestsService.request('GET', 'availableProducts').then(function (data) {
+        $scope.pieChartRequest = $scope.pieChartRequest || ApiRequestsService.dummyPieRequest('GET', 'availableProducts').then(function (data) {
             console.log(data);
-            $scope.pieChartData = data; //REMOVE ONCE DONE WITH THE CHART, THIS IS ONLY TO BIND THE DATA TO THE SITE AND DISPLAY IT
-            //HERE IS WHERE THE CHART NEEDS TO BE CALLED TO DRAW
+            $scope.pieChartData = data;
         });
     }
 
@@ -74,7 +73,7 @@
     }
 
     //API Request Service API Request Service API Request Service API Request Service API Request Service API Request Service API Request Service 
-    function ApiRequestsService($http) {
+    function ApiRequestsService($http,$timeout) {
         var that = this;
 
         that.request = function (method, route, data) {
@@ -94,6 +93,12 @@
                 console.error('error on request');
                 console.error(e);
             }
+        }
+
+        that.dummyPieRequest = function (method, route, data) {
+            console.log('DUMMY => Making %s request to %s', method, route);
+            console.log(data || 'no data on request');
+            return $timeout(function () { return { availableProducts: 107, unusedProducts: 58 } }, 2000);
         }
     }
 })();
