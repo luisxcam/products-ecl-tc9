@@ -33,9 +33,10 @@
 
     //Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers 
     function PieCtrl(ApiRequestsService, $scope) {
-        $scope.helloWorld = 'hello pie';
-        $scope.pieChartRequest = $scope.pieChartRequest || ApiRequestsService.request('GET', 'dummy').then(function (data) {
+        $scope.pieChartRequest = $scope.pieChartRequest || ApiRequestsService.request('GET', 'availableProducts').then(function (data) {
             console.log(data);
+            $scope.pieChartData = data; //REMOVE ONCE DONE WITH THE CHART, THIS IS ONLY TO BIND THE DATA TO THE SITE AND DISPLAY IT
+            //HERE IS WHERE THE CHART NEEDS TO BE CALLED TO DRAW
         });
     }
 
@@ -56,7 +57,7 @@
         that.request = function (method, route, data) {
             var req = {
                 method: method,
-                url: 'http://localhost:8080/products-ut-wo-db/rest/product/' + route,
+                url: 'http://localhost:8080/products-ut-wo-db/rest/' + route,
                 data: data || {}
             }
             console.log('HTTP => Making %s request to %s', method, route);
