@@ -78,13 +78,14 @@
 
         $scope.search.submit = function (productId, productDescriptionEnglish) {
             $scope.list = [];
+            $scope.searchProduct = null;
             var route = '';
             if (!productId && !productDescriptionEnglish) route = 'products';
             else if (productId && productDescriptionEnglish) route = 'product/' + productId + '/productIdAndProductDescriptionEnglish/' + productDescriptionEnglish.toUpperCase();
             else if (productId) route = 'product/' + productId;
             else route = 'product/productDescriptionEnglish/' + productDescriptionEnglish.toUpperCase();
 
-            $scope.searchProduct = $scope.searchProduct || ApiRequestsService.request('GET', route).then(function (data) {
+            $scope.searchProduct = $scope.searchProduct || ApiRequestsService.dummySearch('GET', route).then(function (data) {
                 if (Array.isArray(data)) {
                     for (var x = 0; x < data.length; x++) {
                         $scope.list.push(data[x]);
@@ -92,7 +93,6 @@
                 } else {
                     $scope.list.push(data);
                 }
-                $scope.searchProduct = null;
             });
         }
 
@@ -154,6 +154,39 @@
                     productImageUrl: 'https://www.google.ca/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
                     status: 'active'
                 }
+                console.log(responseData);
+                return responseData;
+            }, 2000);
+        }
+
+        that.dummySearch = function (method, route, data) {
+            console.log('DUMMY => Making %s request to %s', method, route);
+            console.log(data || 'no payload sent');
+            return $timeout(function () {
+                var responseData = [{
+                    id: 1,
+                    productDescriptionEnglish: 'english product description',
+                    productDescriptionFrench: 'french product description',
+                    brandNameEnglish: 'brand name english',
+                    brandNameFrench: 'brand name french',
+                    productType: 'product type',
+                    additionalProductIdentification: 'ehhh dunno',
+                    targetMarket: 'da world!',
+                    productImageUrl: 'http://google.ca',
+                    status: 'a-ok'
+                },
+                {
+                    id: 2,
+                    productDescriptionEnglish: 'What is Lorem Ipsum',
+                    productDescriptionFrench: 'is simply dummy text',
+                    brandNameEnglish: 'of the printing and typesetting ',
+                    brandNameFrench: 'industry.',
+                    productType: 'Lorem Ipsum has',
+                    additionalProductIdentification: 'been the industrys standard',
+                    targetMarket: 'dummy',
+                    productImageUrl: 'https://www.lipsum.com/',
+                    status: 'since the 1500s'
+                }]
                 console.log(responseData);
                 return responseData;
             }, 2000);
