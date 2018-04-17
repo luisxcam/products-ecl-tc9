@@ -77,6 +77,13 @@
         $scope.search.blankForm = angular.copy($scope.search.form);
 
         $scope.search.submit = function(productId,productDescriptionEnglish){
+            if(!productId && !productDescriptionEnglish){
+                $scope.searchProduct = $scope.searchProduct || ApiRequestsService.request('GET', 'products').then(function (data) {
+                    for(var x = 0; x<data.length; x++){
+                        $scope.list.push(data[x]);
+                    }
+                });
+            }
         }
 
         $scope.search.reset = function(){
