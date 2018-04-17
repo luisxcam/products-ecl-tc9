@@ -57,12 +57,14 @@
         $scope.product.submit = function () {
             $scope.productPost = $scope.productPost || ApiRequestsService.dummyPostRequest('POST', 'product/create', $scope.product.form).then(function (data) {
                 console.log(data);
+                $scope.productPost = null;
             });
         };
 
         $scope.product.reset = function () {
             $scope.product.form = angular.copy($scope.product.blankForm);
             $scope.userForm.$setPristine();
+            $scope.productPost = null;
         };
     }
 
