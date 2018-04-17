@@ -41,8 +41,16 @@
     }
 
     function AddProductCtrl(ApiRequestsService, $scope) {
-        $scope.helloWorld = 'hello add';
-        console.log('add product loaded');
+        $scope.product = {
+            productEnglish:'',
+            productFrench:'',
+            brandNameEnglish:'',
+            brandNameFrench:'',
+            productType:'',
+            submit:function(){
+                console.log('hello world');
+            }
+        };
     }
 
     function SearchProductCtrl(ApiRequestsService, $scope) {
