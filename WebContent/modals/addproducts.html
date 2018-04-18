@@ -1,9 +1,10 @@
 <div>
-	<!-- <div class="sub-banner-image1">
+	<div class="sub-banner-image1">
 		<div class="sub-banner-text">
 			<h1>Add Products‎</h1>
 		</div>
-	</div> -->
+	</div>
+	
 	<div>
 		<form name='userForm' ng-submit='product.submit()' novalidate>
 			<div class='container product-text'>
@@ -32,8 +33,7 @@
 				<span ng-show='userForm.$submitted && userForm.productType.$error.required' class='help-block'>Required Field</span>
 				<br>
 
-				<input type='text' name='additionalProductIdentification' ng-model='product.form.additionalProductIdentification' class='form-control'
-				 placeholder='Additional Product Identification *' required>
+				<input type='text' name='additionalProductIdentification' ng-model='product.form.additionalProductIdentification' class='form-control' placeholder='Additional Product Identification *' required>
 				<span ng-show='userForm.$submitted && userForm.additionalProductIdentification.$invalid' class='help-block'>Required Field</span>
 				<br>
 

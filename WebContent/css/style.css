@@ -92,7 +92,7 @@ nav li a:hover {
 
 .hero-image {
     background-image: url("../images/toronto.jpg");
-    height: 50%;
+    height: 300px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -131,7 +131,7 @@ nav li a:hover {
 
 .sub-banner-image {
     background-image: url("../images/earth.jpg");
-    height: 25%;
+    height: 200px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -140,7 +140,7 @@ nav li a:hover {
 
 .sub-banner-image1 {
     background-image: url("../images/brick.jpg");
-    height: 25%;
+    height: 200px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -173,6 +173,17 @@ input[type=text] {
     border: 1px solid #ccc;
 }
 
+input[type=url] {
+    width: 70%;
+    padding: 12px 20px;
+    margin: 10px 0px 10px 0px;
+    box-sizing: border-box;
+    font-size: 16px;
+    color: #808080;
+    display: inline-block;
+    border: 1px solid #ccc;
+}
+
 .search-btn {
     border: none;
     color: white;
@@ -181,7 +192,7 @@ input[type=text] {
     text-decoration: none;
     display: inline-block;
     font-size: 14px;
-    margin: 12px 0px 25px 0px;
+    margin: 12px 0px 10px 0px;
     cursor: pointer;
 }
 
@@ -245,14 +256,24 @@ footer li a:hover {
     color: #FFAB2E;
 }
 
-table,
-th,
-td {
-    border: 1px solid black;
-    border-collapse: collapse;
+table, th, td {
+    border: 1px solid #cccccc;
+    border-collapse: collapse;  
     font-size: 14px;
     padding: 8px;
     margin: 30px;
+    background-color: #eeeeee;
+    color: #808080;
+}
+
+th {
+    border: 1px solid #b3b3b3;
+    border-collapse: collapse;  
+    font-size: 14px;
+    padding: 8px;
+    margin: 30px;
+    background-color: #808080;
+    color: #eeeeee;
 }
 
 /* Add Product */
@@ -311,6 +332,17 @@ td {
     color: #808080;
     padding: 10px 30px;
     margin: 8px 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.requestbtn {
+    width: auto;
+    background-color: #e3e3e4;
+    color: #808080;
+    padding: 10px 30px;
+    margin: 0px 0px;
     border: none;
     cursor: pointer;
     font-size: 14px;
