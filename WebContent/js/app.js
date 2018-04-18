@@ -33,8 +33,31 @@
 
     //Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers Controllers 
     function PieCtrl(ApiRequestsService, $scope) {
-        $scope.pieChartRequest = $scope.pieChartRequest || ApiRequestsService.dummyPieRequest('GET', 'availableProducts').then(function (data) {
+        $scope.pieChartData = null;
+        $scope.pieChartRequest = $scope.pieChartRequest || ApiRequestsService.request('GET', 'availableProducts').then(function (data) {
             $scope.pieChartData = data;
+            new Chart(document.getElementById("myChart").getContext('2d'), {
+                type: 'pie',
+                data: {
+                    labels: ["Available", "Unused"],
+                    datasets: [{
+                        label: 'Product Usage',
+                        data: [data.availableProducts, data.unusedProducts],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                }//,
+                // options:{
+                //     responsive:false
+                // }
+            });
         });
     }
 
@@ -55,7 +78,7 @@
         $scope.product.blankForm = angular.copy($scope.product.form);
 
         $scope.product.submit = function () {
-            $scope.productPost = $scope.productPost || ApiRequestsService.dummyPostRequest('POST', 'product/create', $scope.product.form).then(function (data) {
+            $scope.productPost = $scope.productPost || ApiRequestsService.request('POST', 'product/create', $scope.product.form).then(function (data) {
                 console.log(data);
                 $scope.productPost = null;
             });
@@ -87,7 +110,7 @@
             else if (productId) route = 'product/' + productId;
             else route = 'product/productDescriptionEnglish/' + productDescriptionEnglish.toUpperCase();
 
-            $scope.searchProduct = $scope.searchProduct || ApiRequestsService.dummySearch('GET', route).then(function (data) {
+            $scope.searchProduct = $scope.searchProduct || ApiRequestsService.request('GET', route).then(function (data) {
                 if (Array.isArray(data)) {
                     for (var x = 0; x < data.length; x++) {
                         $scope.list.push(data[x]);
@@ -98,7 +121,7 @@
             });
         }
 
-        $scope.search.nullSearch = function(){
+        $scope.search.nullSearch = function () {
             $scope.list = [];
             $scope.searchProduct = null;
             var route = '4real';
